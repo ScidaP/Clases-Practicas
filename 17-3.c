@@ -8,11 +8,11 @@ typedef struct Nodo {
     struct Nodo* siguiente;
 } Nodo;
 
-Nodo * crearListaVacia() {
+Nodo * crearListaVacia() { // Funciona
     return NULL;
 }
 
-int esListaVacia(Nodo * Lista) {
+int esListaVacia(Nodo * Lista) { // Funciona
     if (Lista == NULL) {
         return 1;
     } else {
@@ -20,7 +20,7 @@ int esListaVacia(Nodo * Lista) {
     }
 }
 
-Nodo * CrearNodo(int X) {
+Nodo * CrearNodo(int X) { // Funciona
     Nodo * nuevoNodo = (Nodo*)malloc(sizeof(Nodo));
     nuevoNodo->dato = X;
     nuevoNodo->siguiente = NULL;
@@ -35,6 +35,24 @@ Nodo * insertar(Nodo * Lista) {
     return Lista;
 }
 
+void primerElemento(Nodo * Lista) { // Funciona
+    printf("Numero del primer elemento de la lista: %d\n", Lista->dato);
+}
+
+Nodo * borrar(Nodo * Lista) { // Funciona
+    if (Lista == NULL) {
+        printf("La lista esta vacia, no se puede eliminar nodos.");
+        return Lista;
+    } else {
+        Nodo * aux = CrearNodo(0);
+        aux = Lista;
+        Lista = aux->siguiente;
+        free(aux);
+        return Lista;
+    }
+
+}
+
 int main() {
     srand(time(NULL));
     Nodo * ListaNueva = (Nodo*)malloc(sizeof(ListaNueva));
@@ -43,6 +61,8 @@ int main() {
     ListaNueva = insertar(ListaNueva);
     ListaNueva = insertar(ListaNueva);
     ListaNueva = insertar(ListaNueva);
+    primerElemento(ListaNueva);
+    ListaNueva = borrar(ListaNueva);
     getchar();getchar();getchar();getchar();
     return 0;
 }
