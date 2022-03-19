@@ -86,8 +86,8 @@ Nodo * borrarK(Nodo * Lista, int datoABorrar) { // En desarrollo
     } else {
         Nodo * aux = CrearNodo(0);
         aux = Lista;
-        while (Lista != NULL) {
-            if (Lista->dato == datoABorrar) {
+        while (aux != NULL) {
+            if (aux->dato == datoABorrar) {
                 Nodo * NuevaLista = borrar(Lista);
             }
         }
