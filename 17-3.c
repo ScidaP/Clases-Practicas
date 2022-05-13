@@ -106,7 +106,8 @@ int estaContenida(Nodo * Lista1, Nodo * Lista2) { // En desarrollo
         for (int k = 0; k < longitudLista2; k++) {
             if (aux->dato == aux2->dato) {
                 coincidencias++;
-                aux = borrar(aux); //Si el primer nodo coincide, entonces ya no me sirve y lo borro. De esta manera, en la proxima iteración, se comparará con el segundo y así sucesivamente.
+                aux = borrar(aux); // Una vez que termina de iterar buscando coincidencias del primer nodo de la primera lista, lo elimino así en la proxima iteración, busca por el segundo.
+                break; // Si se encuentra una coincidencia, se termina con la iteración del for y se 
             } else {
                 aux2 = borrar(aux2); //Si el primer nodo de la primera lista no coincide, entonces borro el priemr nodo de la segunda lista, de esta manera se comparará el primer nodo con el segundo de la segunda lista y así.
             }
