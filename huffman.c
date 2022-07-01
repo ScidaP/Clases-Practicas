@@ -1,18 +1,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef int item;
-const item indefinido = -9999;
+typedef char item;
+const item indefinido = '@';
 const int cant = 5;
 typedef struct nodo {
     struct nodo * izq;
     item dato;
     struct nodo * der;
-}AB;
+}*AB;
 
 
-AB ABVacio(int);
-AB * ArmarAB(AB*, item, AB*);
+AB ABVacio();
+AB ArmarAB(AB, item, AB);
 void resetearValores(int*,int*,int*,int*);
 int encontrarMenor(int[]);
 int encontrarSegundoMenor(int[], int);
@@ -22,44 +22,22 @@ int encontrarIndiceSegundoMenor(int[], int);
 int main() {
     char valores[] = {'A', 'B', 'C', 'D', 'E'};
     int frecuencia[] = {35, 10, 25, 13, 17};  // Frecuencia de cada letra de cada 100
-    AB * arboles[cant];
+    AB arboles[cant];
+    for (int k = 0; k < cant; k++) {
+        arboles[k] = ArmarAB(ABVacio(), valores[k], ABVacio());
+    }
     for (int i = 0; i < cant; i++) {
-        AB arbolIzquierdo;
-        AB arbolDerecho;
-        AB * arbolResultado;
-        int menor = encontrarMenor(frecuencia);
-        int segundomenor = encontrarSegundoMenor(frecuencia, menor);
         int indiceMenor = encontrarIndiceMenor(frecuencia);
+        int menor = frecuencia[indiceMenor];
         int indiceSegundoMenor = encontrarIndiceSegundoMenor(frecuencia, menor);
+        int segundomenor = frecuencia[indiceSegundoMenor];
         frecuencia[indiceMenor] = menor+segundomenor;
         frecuencia[indiceSegundoMenor] = 999999;
-        arbolIzquierdo = ABVacio(menor);
-        arbolDerecho = ABVacio(segundomenor);
-        AB * arbolResultado = ArmarAB(&arbolIzquierdo, 0, &arbolDerecho);
-        arboles[i] = arbolResultado;
+        AB arbolIzquierdo = arboles[indiceMenor];
+        AB arbolDerecho = arboles[indiceSegundoMenor];
+        AB arbolResultado = ArmarAB(arbolIzquierdo, 0, arbolDerecho);
+        arboles[indiceMenor] = arbolResultado;
     }
-}
-
-int encontrarMenor(int a[]) {
-    int menor = 10000;
-    for (int k = 0; k < cant; k++) { // Uso este bucle para obtener la menor frecuencia
-        if (a[k] < menor) {
-            menor = a[k];
-        }
-    }
-    return menor;
-}
-
-int encontrarSegundoMenor(int a[], int menor) {
-    int segundoMenor = 10000;
-    for (int x = 0; x < cant; x++) { // Con este bucle obtengo el segundo con menor frecuencia
-        if (a[x] != menor) {
-            if (a[x] < segundoMenor) {
-                segundoMenor = a[x]; 
-            }
-        }
-    }
-    return segundoMenor;
 }
 
 int encontrarIndiceMenor(int a[]) {
@@ -95,18 +73,14 @@ void resetearValores(int*a, int*b, int*c, int*d) {
     *d = 0;
 }
 
-AB * ArmarAB(AB * izq, item item1, AB * der) {
-    AB * nuevoArbolBinario = (AB*)malloc(sizeof(AB));
+AB ArmarAB(AB izq, item item1, AB der) {
+    struct nodo * nuevoArbolBinario = (struct nodo*)malloc(sizeof(struct nodo));
     nuevoArbolBinario->izq = izq;
     nuevoArbolBinario->dato = item1;
     nuevoArbolBinario->der = der;
     return nuevoArbolBinario;
 }
 
-AB ABVacio(int datoNuevo) {
-    AB arbolBinario;
-    arbolBinario.dato = datoNuevo;
-    arbolBinario.der = NULL;
-    arbolBinario.izq = NULL;
-    return arbolBinario;
+AB ABVacio() {
+    return NULL;
 }
