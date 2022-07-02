@@ -57,9 +57,7 @@ void EnFila(Fila * F, item x) {
 }
 
 void deFila(Fila * F) {
-    if (EsFilaVacia(*F)) {
-        // Si es fila vacía, entonces no hay nada que hacer :)
-    } else {
+    if (!EsFilaVacia(*F)) {
         if (F->final == F->frente) { // Caso en que tenga un solo item en la Fila
             free(F->frente);
             F->final = NULL;
