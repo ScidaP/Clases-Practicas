@@ -14,8 +14,6 @@ typedef struct nodo {
 AB ABVacio();
 AB ArmarAB(AB, item, AB);
 void resetearValores(int*,int*,int*,int*);
-int encontrarMenor(int[]);
-int encontrarSegundoMenor(int[], int);
 int encontrarIndiceMenor(int[]);
 int encontrarIndiceSegundoMenor(int[], int);
 
