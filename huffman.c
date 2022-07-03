@@ -10,7 +10,6 @@ typedef struct nodo {
     struct nodo * der;
 }*AB;
 
-
 AB ABVacio();
 AB ArmarAB(AB, item, AB);
 void resetearValores(int*,int*,int*,int*);
@@ -72,7 +71,7 @@ void resetearValores(int*a, int*b, int*c, int*d) {
 }
 
 AB ArmarAB(AB izq, item item1, AB der) {
-    struct nodo * nuevoArbolBinario = (struct nodo*)malloc(sizeof(struct nodo));
+    AB nuevoArbolBinario = (AB)malloc(sizeof(struct nodo));
     nuevoArbolBinario->izq = izq;
     nuevoArbolBinario->dato = item1;
     nuevoArbolBinario->der = der;
