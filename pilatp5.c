@@ -36,7 +36,6 @@ int main() {
 }
 
 Pila *pop(Pila*pila) {
-    struct nodo * aux;
     pila->tope = pila->tope->siguiente;
     pila->altura = pila->altura - 1;
     return pila;
