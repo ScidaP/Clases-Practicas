@@ -17,6 +17,8 @@ int esLcVacia(LC);
 void LCInsertar(LC*, item);
 void LCBorrar(LC*); // Borra el último item agregado
 void LCRotar(LC*);
+int pertenece(LC, item);
+item LCValor(LC); // Devuelve el último item agregado (el de la ventana) (LC->primerNodo->sig)
 
 int main() {
     LC * nuevaLista = ListaVacia();
@@ -24,9 +26,23 @@ int main() {
     LCInsertar(nuevaLista, 'B');
     LCInsertar(nuevaLista, 'C');
     LCInsertar(nuevaLista, 'D');
-    LCRotar(nuevaLista);
+    printf("Pertenece la C a la LC ? R: %d", pertenece(*nuevaLista, 'C'));
     getchar();getchar();getchar();
     return 0;
+}
+
+int pertenece(LC Lc, item x) {
+    if (esLcVacia(Lc)) {
+        return 0;
+    } else {
+        if (Lc.primerNodo->dato == x) {
+            return 1;
+        } else {
+            LC aux = Lc;
+            LCBorrar(&aux);
+            pertenece(aux, x);
+        }
+    }
 }
 
 void LCRotar(LC * Lc) {

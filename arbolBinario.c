@@ -19,21 +19,16 @@ int Pertenece(AB, item); // Bool
 void inorden(AB);
 AB izquierdo(AB);
 AB derecho(AB);
-AB raiz(AB);
+item raiz(AB);
 
 int main() {
-    AB Hoja1 = ABVacio();
-    AB Hoja2 = ArmarAB(ABVacio(), 'D', ABVacio());
-    AB arbolCompleto = ArmarAB(Hoja1, 'X', Hoja2);
-    AB nuevoArbol = ArmarAB(ABVacio(), 'Z', arbolCompleto);
-    printf("Es arbol vacio el de la izq ? : %d\n", EsABVacio(Hoja1));
-    printf("Es arbol vacio el AB Completo ? : %d\n", EsABVacio(arbolCompleto->izq));
-    inorden(nuevoArbol);
+    AB arbolVacio = ABVacio();
+    izquierdo(arbolVacio);
     getchar();getchar();getchar();getchar();
     return 0;
 }
 
-AB raiz(AB arbolBinario) {
+item raiz(AB arbolBinario) {
     if (EsABVacio(arbolBinario)) {
         return indefinido;
     } else {
@@ -47,12 +42,6 @@ AB derecho(AB arbolBinario) {
 
 AB izquierdo(AB arbolBinario) {
     return arbolBinario->izq;
-}
-
-int PERTENECE(AB T,item X){
-	if ( T != NULL)
-		return (RAIZ(T) == X || PERTENECE(IZQUIERDO(T),X) || PERTENECE(DERECHO(T),X));
-	return 0;
 }
 
 void inorden(AB arbol) {
